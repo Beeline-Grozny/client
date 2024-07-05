@@ -1,0 +1,32 @@
+.wrapper {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+  padding: 20px;
+  border-radius: var(--border-radius-5);
+  transition: 0.3s all ease;
+  background-color: var(--bg);
+  cursor: pointer;
+  &.hide {
+    display: none;
+  }
+
+
+  &:hover {
+    filter: brightness(80%);
+  }
+  & .img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--bg-dark);
+    width: 50px;
+    border-radius: 50%;
+    height: 50px;
+  }
+  & .info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+}

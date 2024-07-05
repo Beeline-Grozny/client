@@ -1,0 +1,17 @@
+.wrapper {
+  background-color: var(--bg);
+  display: flex;
+  height: 100vh; // Изменено, чтобы занять всю высоту окна
+  overflow: hidden; // Скрыть прокрутку для всего wrapper
+}
+
+.body {
+  padding: 40px 20px;
+  padding-left: 95px;
+  overflow-y: auto; // Прокрутка только для body
+  flex-grow: 1;
+  height: 100vh; // Занять всю высоту окна
+  &.open {
+    padding-left: 375px;
+  }
+}
