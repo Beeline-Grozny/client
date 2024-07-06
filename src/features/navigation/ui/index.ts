@@ -1,2 +1,2 @@
-export * from './NavigationLink';
+export * from './NavigationItem';
 export * from './NavigationList';

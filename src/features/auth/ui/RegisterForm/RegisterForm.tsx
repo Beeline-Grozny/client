@@ -14,13 +14,15 @@ export const RegisterForm = () => {
         handleSubmit,
         control,
         register,
+        watch,
     } = useForm<IRegisterRequest>({
         defaultValues: {
-            firstName: '',
-            lastName: '',
-            middleName: '',
+            // firstName: '',
+            // lastName: '',
+            // middleName: '',
             email: '',
             password: '',
+            confirmPassword: '',
         },
     });
 
@@ -31,22 +33,22 @@ export const RegisterForm = () => {
             message: 'Введите корректный адрес электронной почты',
         },
     });
-    const firstName = register('firstName', {
-        required: 'Имя обязательно',
-        minLength: {
-            value: 2,
-            message: 'Имя должно содержать как минимум 2 символа',
-        },
-    });
-
-    const lastName = register('lastName', {
-        required: 'Фамилия обязательна',
-        minLength: {
-            value: 2,
-            message: 'Фамилия должна содержать как минимум 2 символа',
-        },
-    });
-    const middleName = register('middleName');
+    // const firstName = register('firstName', {
+    //     required: 'Имя обязательно',
+    //     minLength: {
+    //         value: 2,
+    //         message: 'Имя должно содержать как минимум 2 символа',
+    //     },
+    // });
+    //
+    // const lastName = register('lastName', {
+    //     required: 'Фамилия обязательна',
+    //     minLength: {
+    //         value: 2,
+    //         message: 'Фамилия должна содержать как минимум 2 символа',
+    //     },
+    // });
+    // const middleName = register('middleName');
 
     const password = register('password', {
         required: 'Пароль обязателен',
@@ -57,6 +59,14 @@ export const RegisterForm = () => {
         maxLength: {
             value: 20,
             message: 'Пароль должен содержать не более 20 символов',
+        },
+    });
+    const confirmPassword = register('confirmPassword', {
+        required: 'Повторите пароль',
+        validate: (value: string) => {
+            if (watch('password') !== value) {
+                return 'Пароли не совпадают';
+            }
         },
     });
     const onSubmit = (data: IRegisterRequest) => {
@@ -76,102 +86,102 @@ export const RegisterForm = () => {
             >
                 Регистрация
             </Text.Heading>
-            <Controller
-                name="firstName"
-                control={control}
-                render={({ field }) => (
-                    <div className={cls.wrapper}>
-                        <Input
-                            className={classNames('', {
-                                [cls.errorInput]: errors.firstName !== undefined,
-                            }, [])}
-                            type="text"
-                            label="Имя"
-                            value={field.value}
-                            onChange={field.onChange}
-                            size={SizeEnum.H2}
-                            border={BorderEnum.H6}
-                            color={ColorEnum.TEXT}
-                            bgColor={ColorEnum.TEXT}
-                            name="firstName"
-                            register={firstName}
-                        />
-                        {errors.firstName &&
-                            <Text.Paragraph
-                                className={cls.error}
-                                color={ColorEnum.DANGER}
-                                size={SizeEnum.H4}
-                            >
-                                {errors.firstName.message}
-                            </Text.Paragraph>
-                        }
-                    </div>
-                )}
-            />
-            <Controller
-                name="lastName"
-                control={control}
-                render={({ field }) => (
-                    <div className={cls.wrapper}>
-                        <Input
-                            className={classNames('', {
-                                [cls.errorInput]: errors.lastName !== undefined,
-                            }, [])}
-                            type="text"
-                            label="Фамилия"
-                            value={field.value}
-                            onChange={field.onChange}
-                            size={SizeEnum.H2}
-                            border={BorderEnum.H6}
-                            color={ColorEnum.TEXT}
-                            bgColor={ColorEnum.TEXT}
-                            name="lastName"
-                            register={lastName}
-                        />
-                        {errors.lastName &&
-                            <Text.Paragraph
-                                className={cls.error}
-                                color={ColorEnum.DANGER}
-                                size={SizeEnum.H4}
-                            >
-                                {errors.lastName.message}
-                            </Text.Paragraph>
-                        }
-                    </div>
-                )}
-            />
-            <Controller
-                name="middleName"
-                control={control}
-                render={({ field }) => (
-                    <div className={cls.wrapper}>
-                        <Input
-                            className={classNames('', {
-                                [cls.errorInput]: errors.middleName !== undefined,
-                            }, [])}
-                            type="text"
-                            label="Отчество"
-                            value={field.value}
-                            onChange={field.onChange}
-                            size={SizeEnum.H2}
-                            border={BorderEnum.H6}
-                            color={ColorEnum.TEXT}
-                            bgColor={ColorEnum.TEXT}
-                            name="middleName"
-                            register={middleName}
-                        />
-                        {errors.middleName &&
-                            <Text.Paragraph
-                                className={cls.error}
-                                color={ColorEnum.DANGER}
-                                size={SizeEnum.H4}
-                            >
-                                {errors.middleName.message}
-                            </Text.Paragraph>
-                        }
-                    </div>
-                )}
-            />
+            {/*<Controller*/}
+            {/*    name="firstName"*/}
+            {/*    control={control}*/}
+            {/*    render={({ field }) => (*/}
+            {/*        <div className={cls.wrapper}>*/}
+            {/*            <Input*/}
+            {/*                className={classNames('', {*/}
+            {/*                    [cls.errorInput]: errors.firstName !== undefined,*/}
+            {/*                }, [])}*/}
+            {/*                type="text"*/}
+            {/*                label="Имя"*/}
+            {/*                value={field.value}*/}
+            {/*                onChange={field.onChange}*/}
+            {/*                size={SizeEnum.H2}*/}
+            {/*                border={BorderEnum.H6}*/}
+            {/*                color={ColorEnum.TEXT}*/}
+            {/*                bgColor={ColorEnum.TEXT}*/}
+            {/*                name="firstName"*/}
+            {/*                register={firstName}*/}
+            {/*            />*/}
+            {/*            {errors.firstName &&*/}
+            {/*                <Text.Paragraph*/}
+            {/*                    className={cls.error}*/}
+            {/*                    color={ColorEnum.DANGER}*/}
+            {/*                    size={SizeEnum.H4}*/}
+            {/*                >*/}
+            {/*                    {errors.firstName.message}*/}
+            {/*                </Text.Paragraph>*/}
+            {/*            }*/}
+            {/*        </div>*/}
+            {/*    )}*/}
+            {/*/>*/}
+            {/*<Controller*/}
+            {/*    name="lastName"*/}
+            {/*    control={control}*/}
+            {/*    render={({ field }) => (*/}
+            {/*        <div className={cls.wrapper}>*/}
+            {/*            <Input*/}
+            {/*                className={classNames('', {*/}
+            {/*                    [cls.errorInput]: errors.lastName !== undefined,*/}
+            {/*                }, [])}*/}
+            {/*                type="text"*/}
+            {/*                label="Фамилия"*/}
+            {/*                value={field.value}*/}
+            {/*                onChange={field.onChange}*/}
+            {/*                size={SizeEnum.H2}*/}
+            {/*                border={BorderEnum.H6}*/}
+            {/*                color={ColorEnum.TEXT}*/}
+            {/*                bgColor={ColorEnum.TEXT}*/}
+            {/*                name="lastName"*/}
+            {/*                register={lastName}*/}
+            {/*            />*/}
+            {/*            {errors.lastName &&*/}
+            {/*                <Text.Paragraph*/}
+            {/*                    className={cls.error}*/}
+            {/*                    color={ColorEnum.DANGER}*/}
+            {/*                    size={SizeEnum.H4}*/}
+            {/*                >*/}
+            {/*                    {errors.lastName.message}*/}
+            {/*                </Text.Paragraph>*/}
+            {/*            }*/}
+            {/*        </div>*/}
+            {/*    )}*/}
+            {/*/>*/}
+            {/*<Controller*/}
+            {/*    name="middleName"*/}
+            {/*    control={control}*/}
+            {/*    render={({ field }) => (*/}
+            {/*        <div className={cls.wrapper}>*/}
+            {/*            <Input*/}
+            {/*                className={classNames('', {*/}
+            {/*                    [cls.errorInput]: errors.middleName !== undefined,*/}
+            {/*                }, [])}*/}
+            {/*                type="text"*/}
+            {/*                label="Отчество"*/}
+            {/*                value={field.value}*/}
+            {/*                onChange={field.onChange}*/}
+            {/*                size={SizeEnum.H2}*/}
+            {/*                border={BorderEnum.H6}*/}
+            {/*                color={ColorEnum.TEXT}*/}
+            {/*                bgColor={ColorEnum.TEXT}*/}
+            {/*                name="middleName"*/}
+            {/*                register={middleName}*/}
+            {/*            />*/}
+            {/*            {errors.middleName &&*/}
+            {/*                <Text.Paragraph*/}
+            {/*                    className={cls.error}*/}
+            {/*                    color={ColorEnum.DANGER}*/}
+            {/*                    size={SizeEnum.H4}*/}
+            {/*                >*/}
+            {/*                    {errors.middleName.message}*/}
+            {/*                </Text.Paragraph>*/}
+            {/*            }*/}
+            {/*        </div>*/}
+            {/*    )}*/}
+            {/*/>*/}
             <Controller
                 name="email"
                 control={control}
@@ -231,6 +241,38 @@ export const RegisterForm = () => {
                                 size={SizeEnum.H4}
                             >
                                 {errors.password.message}
+                            </Text.Paragraph>
+                        }
+                    </div>
+                )}
+            />
+            <Controller
+                name="confirmPassword"
+                control={control}
+                render={({ field }) => (
+                    <div className={cls.wrapper}>
+                        <Input
+                            className={classNames('', {
+                                [cls.errorInput]: errors.confirmPassword !== undefined,
+                            }, [])}
+                            type="password"
+                            label="Пароль"
+                            value={field.value}
+                            onChange={field.onChange}
+                            size={SizeEnum.H2}
+                            border={BorderEnum.H6}
+                            color={ColorEnum.TEXT}
+                            bgColor={ColorEnum.TEXT}
+                            name="confirmPassword"
+                            register={confirmPassword}
+                        />
+                        {errors.confirmPassword &&
+                            <Text.Paragraph
+                                className={cls.error}
+                                color={ColorEnum.DANGER}
+                                size={SizeEnum.H4}
+                            >
+                                {errors.confirmPassword.message}
                             </Text.Paragraph>
                         }
                     </div>

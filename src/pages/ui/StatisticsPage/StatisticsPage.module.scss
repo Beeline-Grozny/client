@@ -1,0 +1,36 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  & .tools {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+  }
+  & .list {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  & .first {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+
+    & > div {
+      height: 400px;
+    }
+  }
+
+  & .second {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 20px;
+
+    & > div {
+      height: 400px;
+    }
+  }
+}

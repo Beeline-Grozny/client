@@ -1,0 +1,18 @@
+.wrapper {
+  border-radius: var(--border-radius-6);
+  background-color: var(--bg-dark);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+
+  & .title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    & .link {
+      text-decoration: underline;
+    }
+  }
+}

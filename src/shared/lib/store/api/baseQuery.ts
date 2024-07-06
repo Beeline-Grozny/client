@@ -6,7 +6,7 @@ export const baseQuery = fetchBaseQuery({
     baseUrl: `${import.meta.env.VITE_SERVER_URL}`,
     credentials: 'include',
     prepareHeaders: (headers, { getState }) => {
-        const accessToken = (getState() as RootState).auth.accessToken;
+        const accessToken = localStorage.getItem("accessToken");
         if (accessToken) {
             headers.set('Authorization', `Bearer ${accessToken}`);
         }
@@ -18,8 +18,7 @@ export const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, Fetch
     let result = await baseQuery(args, api, extraOptions);
 
     if (result.error && result.error.status === 401) {
-        const refreshResult = await baseQuery('/auth/refresh-tokens', api, extraOptions);
-
+        const refreshResult = await baseQuery('/auth/refresh', api, extraOptions);
         if (refreshResult.data) {
             const { accessToken } = refreshResult.data as IAuthResponse;
             localStorage.setItem('accessToken', accessToken.split(' ')[1]);

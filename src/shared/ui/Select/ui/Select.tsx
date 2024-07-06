@@ -4,7 +4,7 @@ import { customStyles, ISelectProps } from '@shared/ui/Select';
 
 export const Select = (
     {
-        styles=customStyles,
+        styles = customStyles,
         options,
         placeholder,
         onChange,
@@ -13,6 +13,8 @@ export const Select = (
         <ReactSelect
             styles={styles}
             options={options}
+            /* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
+            /*@ts-expect-error*/
             onChange={onChange}
             placeholder={placeholder}
         />

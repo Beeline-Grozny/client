@@ -17,7 +17,7 @@ export const useLogin = () => {
     };
     useEffect(() => {
         if (data) {
-            const accessToken = data.accessToken.split(' ')[1];
+            const accessToken = data.token;
             localStorage.setItem('accessToken', accessToken);
             dispatch(setToken(accessToken));
             toast.success('Вы успешно вошли');

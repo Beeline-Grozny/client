@@ -1,2 +1,2 @@
-export * from './StreamPage.tsx';
-export * from './StreamPage.module.scss';
+export * from './CarStreamPage';
+export * from './TrainStreamPage';

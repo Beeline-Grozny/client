@@ -1,5 +1,14 @@
 import { createBrowserRouter, redirect } from 'react-router-dom';
-import { LoginPage, MainPage, RegisterPage, StreamPage } from '@pages/ui';
+import {
+    CarPage,
+    CarStreamPage,
+    LoginPage,
+    MainPage,
+    MyPage,
+    NumbersPage,
+    RegisterPage, StatisticsPage,
+    TrainStreamPage,
+} from '@pages/ui';
 import { AuthProvider } from '@app/providers/AuthProvider.tsx';
 import { SidebarProvider } from '@widgets/lib/utils/SidebarProvider';
 
@@ -13,9 +22,29 @@ export const router = createBrowserRouter([
                 element: <SidebarProvider><MainPage /></SidebarProvider>,
             },
             {
-                path: 'stream',
-                element: <SidebarProvider><StreamPage /></SidebarProvider>,
+                path: 'me',
+                element: <SidebarProvider><MyPage /></SidebarProvider>,
             },
+            {
+                path: 'car',
+                element: <SidebarProvider><CarStreamPage /></SidebarProvider>,
+            },
+            {
+                path: 'train',
+                element: <SidebarProvider><TrainStreamPage /></SidebarProvider>,
+            },
+            {
+                path: 'numbers',
+                element: <SidebarProvider><NumbersPage /></SidebarProvider>,
+            },
+            {
+                path: 'car/:id',
+                element: <SidebarProvider><CarPage /></SidebarProvider>,
+            },
+            {
+                path: 'statistics',
+                element: <SidebarProvider><StatisticsPage /></SidebarProvider>,
+            }
         ],
     },
     {

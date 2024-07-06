@@ -3,3 +3,8 @@ export * from './LoginPage';
 export * from './RegisterPage';
 export * from './StreamPage';
 export * from './RequireAuth';
+export * from './MyPage';
+export * from './NumbersPage';
+export * from './CarPage';
+export * from './StatisticsPage';
+export * from './ReportsPage';

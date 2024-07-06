@@ -1,3 +1,8 @@
+.link {
+  display: block;
+  width: 100%;
+}
+
 .wrapper {
   display: flex;
   gap: 20px;
@@ -7,6 +12,7 @@
   transition: 0.3s all ease;
   background-color: var(--bg);
   cursor: pointer;
+
   &.hide {
     display: none;
   }
@@ -15,6 +21,7 @@
   &:hover {
     filter: brightness(80%);
   }
+
   & .img {
     display: flex;
     justify-content: center;
@@ -24,6 +31,7 @@
     border-radius: 50%;
     height: 50px;
   }
+
   & .info {
     display: flex;
     flex-direction: column;

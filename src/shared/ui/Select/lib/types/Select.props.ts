@@ -12,5 +12,5 @@ export interface ISelectProps {
     styles?: StylesConfig<ISelectItem, false>,
     options: ISelectItem[],
     placeholder: string
-    onChange: (newValue: unknown) => void;
+    onChange: (newValue: string) => void;
 }
