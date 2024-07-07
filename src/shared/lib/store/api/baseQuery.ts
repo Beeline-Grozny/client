@@ -1,5 +1,4 @@
 import { BaseQueryFn, FetchArgs, fetchBaseQuery, FetchBaseQueryError } from '@reduxjs/toolkit/query';
-import { RootState } from '@shared/lib';
 import { IAuthResponse, logout, setToken } from '@features/auth';
 
 export const baseQuery = fetchBaseQuery({
@@ -20,9 +19,9 @@ export const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, Fetch
     if (result.error && result.error.status === 401) {
         const refreshResult = await baseQuery('/auth/refresh', api, extraOptions);
         if (refreshResult.data) {
-            const { accessToken } = refreshResult.data as IAuthResponse;
-            localStorage.setItem('accessToken', accessToken.split(' ')[1]);
-            api.dispatch(setToken(accessToken.split(' ')[1]));
+            const { token } = refreshResult.data as IAuthResponse;
+            localStorage.setItem('accessToken', token);
+            api.dispatch(setToken(token));
             result = await baseQuery(args, api, extraOptions);
         } else {
             localStorage.removeItem('accessToken');

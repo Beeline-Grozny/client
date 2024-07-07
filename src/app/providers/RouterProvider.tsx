@@ -10,7 +10,7 @@ import {
     TrainStreamPage,
 } from '@pages/ui';
 import { AuthProvider } from '@app/providers/AuthProvider.tsx';
-import { SidebarProvider } from '@widgets/lib/utils/SidebarProvider';
+import { SidebarProvider } from '@widgets/lib';
 
 export const router = createBrowserRouter([
     {
@@ -19,7 +19,8 @@ export const router = createBrowserRouter([
         children: [
             {
                 index: true,
-                element: <SidebarProvider><MainPage /></SidebarProvider>,
+                loader: async () => redirect('/statistics'),
+                // element: <SidebarProvider><MainPage /></SidebarProvider>,
             },
             {
                 path: 'me',

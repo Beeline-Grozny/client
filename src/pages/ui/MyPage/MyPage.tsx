@@ -33,9 +33,9 @@ export const MyPage = () => {
     }
         = useForm<IFormChange>({
         defaultValues: {
-            firstName: user?.first_name,
+            firstName: user?.firstName,
             middleName: '',
-            lastName: user?.last_name,
+            lastName: user?.lastName,
             email: user?.email,
             oldPassword: '',
             newPassword: '',
@@ -46,8 +46,8 @@ export const MyPage = () => {
     useEffect(() => {
         if (user) {
             console.log(user);
-            setValue('firstName', user.first_name);
-            setValue('lastName', user.last_name);
+            setValue('firstName', user.firstName);
+            setValue('lastName', user.lastName);
             setValue('email', user.email);
         }
     }, [user]);
