@@ -4,96 +4,27 @@ import { MantineReactTable, MRT_ColumnDef, useMantineReactTable } from 'mantine-
 import { MantineProvider } from '@mantine/core';
 import { useTheme } from '@app/providers';
 import dayjs from 'dayjs';
-
-export enum ReportStatusEnum {
-    GREEN = 'green',
-    ORANGE = 'orange',
-    RED = 'red',
-}
-
-export interface IReport {
-    coordinates: {
-        longitude: string
-        latitude: string
-    };
-    description: string;
-    status: ReportStatusEnum;
-    time: string;
-}
-
-// Пример списка отчетов
-const data: IReport[] = [
-    {
-        coordinates: { latitude: '40.712776', longitude: '-74.005974' },
-        description: 'Report 1',
-        status: ReportStatusEnum.GREEN,
-        time: '2023-07-06T08:30:00Z',
-    },
-    {
-        coordinates: { latitude: '34.052235', longitude: '-118.243683' },
-        description: 'Report 2',
-        status: ReportStatusEnum.ORANGE,
-        time: '2023-07-06T09:00:00Z',
-    },
-    {
-        coordinates: { latitude: '51.507351', longitude: '-0.127758' },
-        description: 'Report 3',
-        status: ReportStatusEnum.RED,
-        time: '2023-07-06T10:00:00Z',
-    },
-    {
-        coordinates: { latitude: '48.856613', longitude: '2.352222' },
-        description: 'Report 4',
-        status: ReportStatusEnum.GREEN,
-        time: '2023-07-06T11:00:00Z',
-    },
-    {
-        coordinates: { latitude: '35.689487', longitude: '139.691711' },
-        description: 'Report 5',
-        status: ReportStatusEnum.ORANGE,
-        time: '2023-07-06T12:00:00Z',
-    },
-    {
-        coordinates: { latitude: '55.755825', longitude: '37.617298' },
-        description: 'Report 6',
-        status: ReportStatusEnum.RED,
-        time: '2023-07-06T13:00:00Z',
-    },
-    {
-        coordinates: { latitude: '40.416775', longitude: '-3.703790' },
-        description: 'Report 7',
-        status: ReportStatusEnum.GREEN,
-        time: '2023-07-06T14:00:00Z',
-    },
-    {
-        coordinates: { latitude: '41.902782', longitude: '12.496366' },
-        description: 'Report 8',
-        status: ReportStatusEnum.ORANGE,
-        time: '2023-07-06T15:00:00Z',
-    },
-    {
-        coordinates: { latitude: '52.520008', longitude: '13.404954' },
-        description: 'Report 9',
-        status: ReportStatusEnum.RED,
-        time: '2023-07-06T16:00:00Z',
-    },
-    {
-        coordinates: { latitude: '34.693737', longitude: '135.502167' },
-        description: 'Report 10',
-        status: ReportStatusEnum.GREEN,
-        time: '2023-07-06T17:00:00Z',
-    },
-];
-
-// Преобразование данных для форматирования времени
-const formattedData = data.map((item) => ({
-    ...item,
-    time: dayjs(item.time).format('YYYY-MM-DD HH:mm:ss'),
-}));
+import { IReport, useGetReports } from '@entities/report';
 
 export const ReportsTable = () => {
     const { theme } = useTheme();
 
+    // Получаем данные отчетов с помощью хука useGetReports
+    const data = useGetReports();
+
+    // Форматируем данные для отображения времени
+    const formattedData = useMemo(() => {
+        if (!data) return [];
+        return data.map((item: IReport) => ({
+            ...item,
+            status: item.status === 'red' ? 'Нарушение' : item.status === 'orange' ? 'Предупреждение' : null,
+            time: dayjs(item.time).format('YYYY-MM-DD HH:mm:ss'),
+            carId: `${item.carId.slice(0, 10)}...`, // Сокращаем id авто до 10 символов
+            cameraId: `${item.cameraId.slice(0, 10)}...`,
+        }));
+    }, [data]);
+
+    // Определяем столбцы таблицы
     const columns = useMemo<MRT_ColumnDef<IReport>[]>(
         () => [
             {
@@ -116,20 +47,31 @@ export const ReportsTable = () => {
                 accessorKey: 'time',
                 header: 'Время',
             },
+            {
+                accessorKey: 'carId',
+                header: 'id авто',
+            },
+            {
+                accessorKey: 'cameraId',
+                header: 'id камеры',
+            },
         ],
         [],
     );
 
+    // Используем хук useMantineReactTable для создания экземпляра таблицы
     const table = useMantineReactTable({
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error
         columns,
-        data: formattedData, // Используем отформатированные данные
+        data: formattedData,
         rowCount: formattedData.length,
     });
 
     return (
         <MantineProvider
             theme={{
-                datesLocale: 'ru',
+                datesLocale: 'ru', // Локализация дат
                 colorScheme: theme,
             }}
         >
@@ -139,3 +81,4 @@ export const ReportsTable = () => {
         </MantineProvider>
     );
 };
+

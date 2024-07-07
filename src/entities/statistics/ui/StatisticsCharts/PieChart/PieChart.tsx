@@ -1,17 +1,27 @@
+import React from 'react';
 import cls from './PieChart.module.scss';
-import { Pie } from '@ant-design/plots';
+import { Pie, PieConfig } from '@ant-design/plots';
 import { Text } from '@shared/ui';
 import { ColorEnum, SizeEnum, WeightEnum } from '@shared/lib';
+import { IPieData, useGetPieQuery } from '@entities/statistics';
 
 export const PieChart = () => {
-    const config = {
-        data: [
-            { type: 'Положительных', value: 99 },
-            { type: 'Отрицательных', value: 1 },
-        ],
+    const { data, error, isLoading } = useGetPieQuery(null);
+
+    if (isLoading) {
+        return <div>Loading...</div>;
+    }
+
+    if (error) {
+        return <div>Error loading data</div>;
+    }
+
+    const config: PieConfig = {
+        data: data || [], // Используем загруженные данные или пустой массив, если данные еще не загружены
         angleField: 'value',
         colorField: 'type',
     };
+
     return (
         <div className={cls.wrapper}>
             <div className={cls.title}>
@@ -34,7 +44,4 @@ export const PieChart = () => {
             <Pie {...config} />
         </div>
     );
-
-
 };
-

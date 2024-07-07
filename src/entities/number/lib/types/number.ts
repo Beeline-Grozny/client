@@ -15,4 +15,5 @@ export interface INumberData {
     statistic: Statistic | null;
     location: Location;
     threadURL: string;
+
 }

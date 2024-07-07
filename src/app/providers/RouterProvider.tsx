@@ -6,7 +6,7 @@ import {
     MainPage,
     MyPage,
     NumbersPage,
-    RegisterPage, StatisticsPage,
+    RegisterPage, ReportsPage, StatisticsPage,
     TrainStreamPage,
 } from '@pages/ui';
 import { AuthProvider } from '@app/providers/AuthProvider.tsx';
@@ -44,7 +44,11 @@ export const router = createBrowserRouter([
             {
                 path: 'statistics',
                 element: <SidebarProvider><StatisticsPage /></SidebarProvider>,
-            }
+            },
+            {
+                path: 'reports',
+                element: <SidebarProvider><ReportsPage /></SidebarProvider>,
+            },
         ],
     },
     {

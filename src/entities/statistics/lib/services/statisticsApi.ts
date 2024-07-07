@@ -1,37 +1,20 @@
 import { mainApi } from '@store/api';
-import { BaseQueryArg } from '@reduxjs/toolkit/dist/query/baseQueryTypes';
+import { ILineData, IPieData } from '@entities/statistics';
 
 export const statisticsApi = mainApi.injectEndpoints({
     endpoints: (builder) => ({
-        getAll: builder.query({
+        getLine: builder.query<ILineData[], null>({
             query: () => ({
-                url: '/statistics/penalty',
+                url: `/camera_api/get_linear_graf`,
                 method: 'GET',
             }),
         }),
-        getByWorkerId: builder.query({
-            query: (id: string) => ({
-                url: `/statistics/penalty/user/${id}`,
-                method: 'GET',
-            }),
-        }),
-        getByObjectId: builder.query({
-            query: (id: string) => ({
-                url: `/statistics/penalty/building/${id}`,
-                method: 'GET',
-            }),
-        }),
-        getAllCharts: builder.query({
+        getPie: builder.query<IPieData[], null>({
             query: () => ({
-                url: `/statistics/penalty/array`,
+                url: `/camera_api/get_round_graf/`,
                 method: 'GET',
             }),
         }),
     }),
 });
-export const {
-    useGetAllQuery,
-    useLazyGetByWorkerIdQuery,
-    useLazyGetByObjectIdQuery,
-    useGetAllChartsQuery,
-} = statisticsApi;
+export const { useGetLineQuery, useGetPieQuery } = statisticsApi;

@@ -41,3 +41,17 @@
     gap: 20px;
   }
 }
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  &Item {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 10px 20px;
+    background-color: var(--bg);
+    border-radius: var(--border-radius-5);
+  }
+}

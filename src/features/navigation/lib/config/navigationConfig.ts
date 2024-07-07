@@ -13,8 +13,8 @@ export const NavigationConfig: INavigation[] = [
         path: '/car',
         label: 'Машины',
     },
-    {
-        path: '/train',
-        label: 'Поезда',
-    },
+    // {
+    //     path: '/train',
+    //     label: 'Поезда',
+    // },
 ];
